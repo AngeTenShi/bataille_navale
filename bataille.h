@@ -19,10 +19,12 @@ typedef struct boats
 /* STRUCTURE GLOBALE QUI CONTINET LES PROPRIÉTES DE LA PARTIE */
 typedef struct game_properties
 {
-	int size;
+	int	size_x;
+	int	size_y;
+	char **board;
 	boats *player_one_boats;
 	boats *player_two_boats;
-} game_prop;
+} game;
 
 /*//////////////////////////////////////////////*/
 /* PROTOTYPE DU PROF POUR LA GESTION DE MEMOIRE */
@@ -37,9 +39,10 @@ void free_prof (void *ptr);
 
 int	parse_args(int ac, char **av);
 char	**ft_split(char const *s, char c);
+int	ft_strlen_2d(char **tab);
 
 /* GAME */
 
-void	interactive_mode();
+void	interactive_mode(game *prop);
 
 #endif

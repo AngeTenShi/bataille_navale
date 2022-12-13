@@ -90,9 +90,20 @@ char	**ft_split(char const *s, char c)
 			i++;
 		while ((!(is_sep(s[i], c))) && s[i])
 			tab[j][w++] = s[i++];
-		tab[j][w] = 0;
+		tab[j][w] = 0
+		;
 		j++;
 	}
 	tab[j] = 0;
 	return (tab);
+}
+
+int	ft_strlen_2d(char **tab)
+{
+	int i;
+
+	i = 0;
+	while (tab[i])
+		i++;
+	return (i);
 }
