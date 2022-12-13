@@ -4,15 +4,19 @@ RED			=	\033[0;31m
 CYAN		=	\033[0;36m
 COLOR_OFF	=	\033[0m\0
 YELLOW		=	\033[0;33m
-FLAGS		=	-Wall -Wextra -Werror
+FLAGS		=	-Wall -Wextra -Werror -ansi -pedantic -fsanitize=address
 SRCS_DIR	=	./
 OBJS_DIR	=	objs
-SRCS		=
+SRCS		=	main.c prof/stdprof.c \
+				parsing/parsing.c parsing/utils.c \
+				game/interactive.c
+
+
 OBJS		=	$(SRCS:%.c=$(OBJS_DIR)/%.o)
 
 all:	$(NAME)
 
-$(NAME):	$(LFT) $(OBJS)
+$(NAME): $(OBJS)
 			$(CC) $(FLAGS) -o  $@ $^ $(LIB) $(LDFLAGS)
 
 $(OBJS): $(OBJS_DIR)/%.o: $(SRCS_DIR)/%.c
@@ -31,4 +35,4 @@ fclean:		clean
 
 re:			fclean all
 
-.PHONY:		all clean fclean r
+.PHONY:		all clean fclean re
