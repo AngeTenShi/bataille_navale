@@ -39,10 +39,11 @@ void free_prof (void *ptr);
 
 /* PARSING */
 
-int	parse_args(int ac, char **av);
+int		parse_args(int ac, char **av);
 char	**ft_split(char const *s, char c);
-int	ft_strlen_2d(char **tab);
+int		ft_strlen_2d(char **tab);
 char	*ft_strdup(char *c);
+int		is_boat(char *str);
 
 /* GAME */
 

@@ -117,3 +117,21 @@ char	*ft_strdup(char *c)
 
 	return (dup);
 }
+
+int	is_boat(char *str)
+{
+	int i;
+	char	*name_tabs[4] = {"Gaia","Oedipe","Athena","Herecles"};
+
+	i = 0;
+	while (i < 4)
+	{
+		if (strlen(name_tabs[i]) == strlen(str))
+		{
+			if (!strncmp(str , name_tabs[i], strlen(str)))
+				return (1);
+		}
+		i++;
+	}
+	return (0);
+}

@@ -2,7 +2,53 @@
 
 int	place_boats(game *prop, char *buffer)
 {
-	
+	char	**temp_buf;
+	char	**temp_pos;
+
+	temp_buf = ft_split(buffer, ' ');
+	if (ft_strlen_2d(temp_buf) != 4)
+	{
+		printf("Invalid format for placing boats\n");
+		free(temp_buf);
+		return (0);
+	}
+	if (temp_buf[0][0] =='J' && (temp_buf[0][1] == '1' || temp_buf[0][1] == '2') && strlen(temp_buf[0]) == 2)
+	{
+		if (temp_buf[1][0] == 'P' && strlen(temp_buf[1]) == 1)
+		{
+			if (is_boat(temp_buf[2]))
+			{
+				if (strchr(temp_buf[3], ':') != NULL)
+				{
+					temp_pos = ft_split(temp_buf[3], ':');
+				}
+				else
+				{
+					printf("Invalid format for placing boats\n");
+					free(temp_buf);
+					return (0);
+				}
+			}
+			else
+			{
+				printf("Invalid format for placing boats\n");
+				free(temp_buf);
+				return (0);
+			}
+		}
+		else
+		{
+			printf("Invalid format for placing boats\n");
+			free(temp_buf);
+			return (0);
+		}
+	}
+	else
+	{
+		printf("Invalid format for placing boats\n");
+		free(temp_buf);
+		return (0);
+	}
 	return (1);
 }
 
@@ -33,27 +79,24 @@ int	get_size_from_buffer(game *prop, char *buffer)
 		free(temp_buf);
 		return (0);
 	}
-	else
+	if (!strncmp(temp_buf[0], "Projet", 6) && strlen(temp_buf[0]) == 6)
 	{
-		if (!strncmp(temp_buf[0], "Projet", 6) && strlen(temp_buf[0]) == 6)
+		temp_size = ft_split(temp_buf[1], 'x');
+		size_x = atoi(temp_size[0]);
+		size_y = atoi(temp_size[1]);
+		if (size_x < 5 || size_y < 5)
 		{
-			temp_size = ft_split(temp_buf[1], 'x');
-			size_x = atoi(temp_size[0]);
-			size_y = atoi(temp_size[1]);
-			if (size_x < 5 || size_y < 5)
-			{
-				printf("Project size too little re enter one\n");
-				free(temp_size);
-				free(temp_buf);
-				return (0);
-			}
+			printf("Project size too little re enter one\n");
 			free(temp_size);
-			prop->size_x = size_x;
-			prop->size_y = size_y;
+			free(temp_buf);
+			return (0);
 		}
-		else
-			printf("Project size not correct re enter one\n");
+		free(temp_size);
+		prop->size_x = size_x;
+		prop->size_y = size_y;
 	}
+	else
+		printf("Project size not correct re enter one\n");
 	free(temp_buf);
 	return (1);
 }
