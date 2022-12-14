@@ -2,6 +2,30 @@
 
 
 /* INITIALISATION DES PROPRIÉTES DU JEU DANS UNE STRUCTURE */
+
+void	init_boats(game *prop)
+{
+	int i;
+	char	*name_tabs[4] = {"Gaia","Oedipe","Athena","Herecles"};
+
+	i = 0;
+	prop->player_one_boats = (boats *)malloc(sizeof(boats) * 4);
+	prop->player_two_boats = (boats *)malloc(sizeof(boats) * 4);
+	while (i < 4)
+	{
+		prop->player_one_boats[i].name = ft_strdup(name_tabs[i]);
+		prop->player_two_boats[i].name = ft_strdup(name_tabs[i]);
+		if (i == 0)
+			prop->player_one_boats[i].size = 2;
+		else if (i == 1 || i == 2)
+			prop->player_one_boats[i].size = 3;
+		else
+			prop->player_one_boats[i].size = 4;
+		prop->player_two_boats[i].size = prop->player_one_boats[i].size;
+		i++;
+	}
+}
+
 game	*init_game_prop()
 {
 	game *ret;
@@ -11,7 +35,9 @@ game	*init_game_prop()
 	ret->player_two_boats = NULL;
 	ret->size_x = 0;
 	ret->size_y = 0;
+	ret->count = 0;
 	ret->board = NULL;
+	init_boats(ret);
 	return (ret);
 }
 

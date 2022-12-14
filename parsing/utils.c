@@ -107,3 +107,13 @@ int	ft_strlen_2d(char **tab)
 		i++;
 	return (i);
 }
+
+char	*ft_strdup(char *c)
+{
+	char	*dup = malloc(strlen(c) + 1);
+
+	if (dup != NULL)
+		strcpy(dup, c);
+
+	return (dup);
+}
