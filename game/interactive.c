@@ -1,70 +1,5 @@
 #include "../bataille.h"
 
-int	place_boats(game *prop, char *buffer)
-{
-	char	**temp_buf;
-	char	**temp_pos;
-
-	temp_buf = ft_split(buffer, ' ');
-	if (ft_strlen_2d(temp_buf) != 4)
-	{
-		printf("Invalid format for placing boats\n");
-		free(temp_buf);
-		return (0);
-	}
-	if (temp_buf[0][0] =='J' && (temp_buf[0][1] == '1' || temp_buf[0][1] == '2') && strlen(temp_buf[0]) == 2)
-	{
-		if (temp_buf[1][0] == 'P' && strlen(temp_buf[1]) == 1)
-		{
-			if (is_boat(temp_buf[2]))
-			{
-				if (strchr(temp_buf[3], ':') != NULL)
-				{
-					temp_pos = ft_split(temp_buf[3], ':');
-				}
-				else
-				{
-					printf("Invalid format for placing boats\n");
-					free(temp_buf);
-					return (0);
-				}
-			}
-			else
-			{
-				printf("Invalid format for placing boats\n");
-				free(temp_buf);
-				return (0);
-			}
-		}
-		else
-		{
-			printf("Invalid format for placing boats\n");
-			free(temp_buf);
-			return (0);
-		}
-	}
-	else
-	{
-		printf("Invalid format for placing boats\n");
-		free(temp_buf);
-		return (0);
-	}
-	return (1);
-}
-
-void	init_board(game *prop)
-{
-	int i;
-
-	i = 0;
-	prop->board = (char **)malloc_prof(sizeof(char *) * (prop->size_y + 1));
-	while (i < prop->size_y)
-	{
-		prop->board[i] = (char *)calloc_prof(prop->size_x, sizeof(char));
-		i++;
-	}
-}
-
 int	get_size_from_buffer(game *prop, char *buffer)
 {
 	int		size_x;
@@ -76,7 +11,7 @@ int	get_size_from_buffer(game *prop, char *buffer)
 	if (ft_strlen_2d(temp_buf) != 2)
 	{
 		printf("Project size not correct re enter one\n");
-		free(temp_buf);
+		free_split(temp_buf);
 		return (0);
 	}
 	if (!strncmp(temp_buf[0], "Projet", 6) && strlen(temp_buf[0]) == 6)
@@ -87,25 +22,25 @@ int	get_size_from_buffer(game *prop, char *buffer)
 		if (size_x < 5 || size_y < 5)
 		{
 			printf("Project size too little re enter one\n");
-			free(temp_size);
-			free(temp_buf);
+			free_split(temp_size);
+			free_split(temp_buf);
 			return (0);
 		}
-		free(temp_size);
+		free_split(temp_size);
 		prop->size_x = size_x;
 		prop->size_y = size_y;
 	}
 	else
 		printf("Project size not correct re enter one\n");
-	free(temp_buf);
+	free_split(temp_buf);
 	return (1);
 }
 
 void	interactive_mode(game *prop)
 {
-	int interactive;
-	char *buffer;
-	int	count;
+	int		interactive;
+	char	*buffer;
+	int		count;
 
 	interactive = 1;
 	buffer = (char *)calloc_prof(50, sizeof(char));
@@ -116,7 +51,8 @@ void	interactive_mode(game *prop)
 			printf("Enter a correct size to begin (format : Projet 1x1)\n");
 		if (prop->count == 1)
 		{
-			printf("Place your boats on the board (Format : J1/2 P Name P y:x)\n");
+			init_boats(prop);
+			printf("Place your boats on the board (Format : J1/2 P \"Name\" x:y)\n");
 			printf("There is 4 types of boat per player : Gaia (size 2), Athena (size 3), Oedipe (taille 3), Herecles (size 4)\n");
 		}
 		printf("Bataille navale > ");
@@ -129,7 +65,7 @@ void	interactive_mode(game *prop)
 				count++;
 			}
 		}
-		if (prop->count == 1)
+		if (prop->count > 0 && prop->count <= 8)
 		{
 			if (place_boats(prop, buffer))
 				count++;
@@ -139,5 +75,5 @@ void	interactive_mode(game *prop)
 		fflush(stdin);
 		prop->count = count;
 	}
-	free(buffer);
+	free_prof(buffer);
 }
