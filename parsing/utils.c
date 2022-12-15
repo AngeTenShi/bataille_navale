@@ -33,7 +33,7 @@ static size_t	word(char const *s, char c)
 
 static int	alloc_char(size_t len, size_t index, char **tab)
 {
-	tab[index] = malloc(sizeof(char) * len + 1);
+	tab[index] = (char *)malloc_prof(sizeof(char) * len + 1);
 	if (!tab[index])
 		return (0);
 	return (1);
@@ -49,7 +49,7 @@ static char	**walloc(char const *s, char c)
 	w = 0;
 	i = 0;
 	j = 0;
-	tab = malloc(sizeof(char *) * (word(s, c) + 1));
+	tab = (char **)malloc_prof(sizeof(char *) * (word(s, c) + 1));
 	if (!tab)
 		return (NULL);
 	while (s[i] && s[j])
@@ -110,8 +110,9 @@ int	ft_strlen_2d(char **tab)
 
 char	*ft_strdup(char *c)
 {
-	char	*dup = malloc(strlen(c) + 1);
+	char	*dup;
 
+	dup = (char *)malloc_prof(strlen(c) + 1);
 	if (dup != NULL)
 		strcpy(dup, c);
 
@@ -121,7 +122,7 @@ char	*ft_strdup(char *c)
 int	is_boat(char *str)
 {
 	int i;
-	char	*name_tabs[4] = {"Gaia","Oedipe","Athena","Herecles"};
+	char	*name_tabs[4] = {"\"Gaia\"","\"Oedipe\"","\"Athena\"","\"Herecles\""};
 
 	i = 0;
 	while (i < 4)
@@ -134,4 +135,30 @@ int	is_boat(char *str)
 		i++;
 	}
 	return (0);
+}
+
+int	max(char *first, char *second)
+{
+	int f;
+	int s;
+
+	f = atoi(first);
+	s = atoi(second);
+	if (f > s)
+		return (f);
+	else
+		return (s);
+}
+
+int	min(char *first, char *second)
+{
+	int f;
+	int s;
+
+	f = atoi(first);
+	s = atoi(second);
+	if (f < s)
+		return (f);
+	else
+		return (s);
 }
