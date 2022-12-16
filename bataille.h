@@ -7,6 +7,7 @@
 #include <stddef.h>
 #include <string.h>
 #include <ctype.h>
+#include <time.h> /* USED FOR RANDOMIZED THE SEED TO GENERATE SAVE FILE */
 
 /* STRUCTURE QUI IDENTIFIE CHAQUE BATEAU */
 typedef struct boats
@@ -28,6 +29,7 @@ typedef struct game_properties
 	boats	*player_one_boats;
 	boats	*player_two_boats;
 	int		count;
+	char	*game_id;
 } game;
 
 /*//////////////////////////////////////////////*/
@@ -55,6 +57,11 @@ int		get_position(game *prop, char **temp_pos);
 void	init_board(game *prop);
 int		place_on_board(game *prop, char *x, char *y, char player);
 void	print_board(game *prop, char **board);
+void	identify_command(game *prop, char *buffer);
+
+/* SAVE */
+void	generate_game_id(game *prop);
+void	write_into_savefile(game *prop, char *buffer);
 
 /* UTILS */
 int		min(char *first, char *second);
@@ -62,10 +69,11 @@ int		max(char *first, char *second);
 char	**ft_split(char const *s, char c);
 
 /* ERROR */
-void	print_error(char *message, void *to_free);
+void	print_error(char *message, char **to_free);
 
 /* FREE */
 void	free_boats_name(game *prop);
 void	free_split(char **splitted);
+
 
 #endif

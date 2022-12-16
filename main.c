@@ -4,11 +4,17 @@
 
 void	free_game(game *prop)
 {
-	free_split(prop->board_j1);
-	free_split(prop->board_j2);
+	if (prop->board_j1 != NULL)
+		free_split(prop->board_j1);
+	if (prop->board_j2 != NULL)
+		free_split(prop->board_j2);
 	free_boats_name(prop);
-	free_prof(prop->player_one_boats);
-	free_prof(prop->player_two_boats);
+	if (prop->game_id != NULL)
+		free_prof(prop->game_id);
+	if (prop->player_one_boats !=  NULL)
+		free_prof(prop->player_one_boats);
+	if (prop->player_one_boats != NULL)
+		free_prof(prop->player_two_boats);
 	free_prof(prop);
 }
 

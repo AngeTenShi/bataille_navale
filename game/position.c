@@ -46,6 +46,7 @@ int	get_position(game *prop, char **temp_pos)
 
 	first_pos = temp_pos[0];
 	second_pos = temp_pos[1];
+	temp_range = NULL;
 
 	if (strchr(first_pos, '-') != NULL && strchr(second_pos, '-') != NULL)
 	{
@@ -77,6 +78,7 @@ int	get_position(game *prop, char **temp_pos)
 		}
 		else
 		{
+			free_split(temp_range);
 			printf("Error : Your boat is out of board\n");
 			return (0);
 		}
@@ -107,6 +109,7 @@ int	get_position(game *prop, char **temp_pos)
 		}
 		else
 		{
+			free_split(temp_range);
 			printf("Error : Your boat is out of board\n");
 			return (0);
 		}
@@ -118,6 +121,7 @@ int	get_position(game *prop, char **temp_pos)
 			printf("Error : Your boat is out of board\n");
 			return (0);
 		}
+
 	}
 	return (1);
 }

@@ -3,12 +3,15 @@
 void *malloc_prof (size_t taille)
 {
 	void* p = malloc(taille);
+	/*printf("Malloc : %p\n", p); */
 	return (p);
 }
 
 void *calloc_prof (size_t nb, size_t taille)
 {
-	void* p = calloc(nb,taille);
+	void* p;
+	p = calloc(nb,taille);
+	/* printf("Malloc : %p\n", p); */
 	return (p);
 }
 
@@ -20,5 +23,6 @@ void *realloc_prof (void *ptr, size_t taille)
 
 void free_prof (void *ptr)
 {
+	/*printf("Free : %p\n", ptr); */
 	free(ptr);
 }

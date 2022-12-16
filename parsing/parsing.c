@@ -11,6 +11,7 @@ void	init_game_prop(game *prop)
 	prop->count = 0;
 	prop->board_j1 = NULL;
 	prop->board_j2 = NULL;
+	generate_game_id(prop);
 }
 
 int exec_args(int ac, char **av, game *prop)

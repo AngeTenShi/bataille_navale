@@ -45,6 +45,7 @@ void	interactive_mode(game *prop)
 	interactive = 1;
 	buffer = (char *)calloc_prof(50, sizeof(char));
 	count = 0;
+	printf("Welcome in the game your game id file is : %s\nYou can access it into save/%s\n", prop->game_id, prop->game_id);
 	while (interactive)
 	{
 		if (prop->count == 0)
@@ -57,21 +58,27 @@ void	interactive_mode(game *prop)
 		}
 		printf("Bataille navale > ");
 		fgets(buffer, 50, stdin);
+		if (!strncmp(buffer, "exit", 4))
+			interactive = 0;
 		if (prop->count == 0)
 		{
 			if (get_size_from_buffer(prop, buffer))
 			{
 				init_board(prop);
+				write_into_savefile(prop, buffer);
 				count++;
 			}
 		}
 		if (prop->count > 0 && prop->count <= 8)
 		{
 			if (place_boats(prop, buffer))
+			{
+				write_into_savefile(prop,buffer);
 				count++;
+			}
 		}
-		if (!strncmp(buffer, "exit", 4))
-			interactive = 0;
+		if (prop->count > 8)
+			identify_command(prop, buffer);
 		fflush(stdin);
 		prop->count = count;
 	}

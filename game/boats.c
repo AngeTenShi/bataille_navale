@@ -5,6 +5,8 @@ void init_boats(game *prop)
 	int i;
 	char *name_tabs[4] = {"Gaia", "Oedipe", "Athena", "Herecles"};
 
+	if (prop->player_one_boats != NULL || prop->player_two_boats != NULL)
+		return ;
 	i = 0;
 	prop->player_one_boats = (boats *)malloc_prof(sizeof(boats) * 4);
 	prop->player_two_boats = (boats *)malloc_prof(sizeof(boats) * 4);
@@ -49,8 +51,8 @@ int	place_boats(game *prop, char *buffer)
 					temp_pos = ft_split(temp_buf[3], ':');
 					if (!get_position(prop, temp_pos))
 					{
+						free_split(temp_buf);
 						free_split(temp_pos);
-						print_error("Invalid format for placing boats\n", temp_buf);
 						return (0);
 					}
 					else
@@ -71,7 +73,7 @@ int	place_boats(game *prop, char *buffer)
 			}
 			else
 			{
-				print_error("Invalid format for placing boats\n", temp_buf);
+				print_error("Invalid Player only two players in the game\n", temp_buf);
 				return (0);
 			}
 		}
