@@ -29,7 +29,8 @@ typedef struct game_properties
 	boats	*player_one_boats;
 	boats	*player_two_boats;
 	int		count;
-	int	nb_boats;
+	int		nb_boats_j1;
+	int		nb_boats_j2;
 	char	*game_id;
 } game;
 

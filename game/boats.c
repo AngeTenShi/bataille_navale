@@ -110,10 +110,15 @@ int	check_for_three(game *prop, char **temp_buf)
 					place_on_board(prop , temp_pos[0] , temp_pos[1], temp_buf[0][1]);
 				/*set_boat_place(); // TODO */
 					if (temp_buf[0][1] == '1')
+					{
 						print_board(prop, prop->board_j1);
+						prop->nb_boats_j1++;
+					}
 					else
+					{
 						print_board(prop, prop->board_j2);
-					prop->nb_boats++;
+						prop->nb_boats_j2++;
+					}
 					free_split(temp_pos);
 				}
 			}

@@ -9,7 +9,7 @@ int	check_if_conflict(game *prop, int x, int y, char player)
 		board = prop->board_j1;
 	else
 		board = prop->board_j2;
-	if (board[x][y] != '\0')
+	if (board[y][x] != 0)
 		return (1);
 	return (0);
 }
@@ -20,7 +20,8 @@ int	check_into_board(game *prop, int val, int x_or_y)
 	if (x_or_y)
 	{
 		if (val >= prop->size_x || val < 0)
-			return (0);	}
+			return (0);
+	}
 	else
 	{
 		if (val >= prop->size_y || val < 0)
@@ -30,11 +31,16 @@ int	check_into_board(game *prop, int val, int x_or_y)
 }
 
 /* FONCTION POUR VERIFIER QUE LE BATEAU PLACE SELON LE NOM CORRESPOND À LA BONNE TAILLE*/
-int	check_if_size_boat(game *prop, char *boat, int size)
+int	 check_if_size_boat(game *prop, char *boat, int size, char player)
 {
 	int	size_of_boat;
 	int	i;
-
+	int	nb_boats;
+// DEFINIR DE QUELLES LISTES DE BATEAUX ON PARLE J1 OU 2
+	if (player == '1')
+		nb_boats = prop->nb_boats_j1;
+	else
+		nb_boats = prop->nb_boats_j2;
 	i = 0;
 	if (boat == NULL)
 		return (1);
@@ -43,14 +49,29 @@ int	check_if_size_boat(game *prop, char *boat, int size)
 		printf("Boat too long\n");
 		return (0);
 	}
-	while (i < prop->nb_boats)
+	if (is_boat(boat))
 	{
-		if (!strncmp(boat, prop->player_one_boats[i].name, strlen(boat)) && strlen(boat) == strlen(prop->player_one_boats[i].name))
+		while (i < 4)
 		{
-			size_of_boat = prop->player_one_boats[i].size;
-			break ;
+			if (!strncmp(boat, prop->player_one_boats[i].name, strlen(boat)) && strlen(boat) == strlen(prop->player_one_boats[i].name))
+			{
+				size_of_boat = prop->player_one_boats[i].size;
+				break ;
+			}
+			i++;
 		}
-		i++;
+	}
+	else
+	{
+		while (i < nb_boats)
+		{
+			if (!strncmp(boat, prop->player_one_boats[i].name, strlen(boat)) && strlen(boat) == strlen(prop->player_one_boats[i].name))
+			{
+				size_of_boat = prop->player_one_boats[i].size;
+				break ;
+			}
+			i++;
+		}
 	}
 	if (size == size_of_boat)
 		return (1);
@@ -62,7 +83,8 @@ int	check_if_size_boat(game *prop, char *boat, int size)
 
 int	check_game_begin(game *prop)
 {
+	/*
 	if (prop->nb_boats < 4 || prop->nb_boats > 6 )
-		return (0);
+		return (0); */
 	return (1);
 }
