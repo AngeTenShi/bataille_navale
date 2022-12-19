@@ -29,17 +29,11 @@ void init_boats(game *prop)
 	}
 }
 
-int	place_boats(game *prop, char *buffer)
+/* DIFFÉRENTS CHECK POUR DIFFÉRENTS FORMATS */
+int	check_for_four(game *prop, char **temp_buf)
 {
-	char	**temp_buf;
 	char	**temp_pos;
 
-	temp_buf = ft_split(buffer, ' ');
-	if (ft_strlen_2d(temp_buf) != 4)
-	{
-		print_error("Invalid format for placing boats\n", temp_buf);
-		return (0);
-	}
 	if (temp_buf[0][0] =='J' && (temp_buf[0][1] == '1' || temp_buf[0][1] == '2') && strlen(temp_buf[0]) == 2)
 	{
 		if (temp_buf[1][0] == 'P' && strlen(temp_buf[1]) == 1)
@@ -49,7 +43,7 @@ int	place_boats(game *prop, char *buffer)
 				if (strchr(temp_buf[3], ':') != NULL)
 				{
 					temp_pos = ft_split(temp_buf[3], ':');
-					if (!get_position(prop, temp_pos))
+					if (!get_position(prop, temp_pos, temp_buf[0][1], temp_buf[2]))
 					{
 						free_split(temp_buf);
 						free_split(temp_pos);
@@ -58,22 +52,24 @@ int	place_boats(game *prop, char *buffer)
 					else
 					{
 						place_on_board(prop , temp_pos[0] , temp_pos[1], temp_buf[0][1]);
-						free_split(temp_pos);
+						/*set_boat_place(); // TODO */
 						if (temp_buf[0][1] == '1')
 							print_board(prop, prop->board_j1);
 						else
 							print_board(prop, prop->board_j2);
+						prop->nb_boats++;
+						free_split(temp_pos);
 					}
 				}
 				else
 				{
-					print_error("Invalid Boat Name\n", temp_buf);
+					print_error("Invalid format for placing boats\n", temp_buf);
 					return (0);
 				}
 			}
 			else
 			{
-				print_error("Invalid Player only two players in the game\n", temp_buf);
+				print_error("Invalid Boat Name\n", temp_buf);
 				return (0);
 			}
 		}
@@ -88,6 +84,86 @@ int	place_boats(game *prop, char *buffer)
 		print_error("Bad player number\n", temp_buf);
 		return (0);
 	}
+	return (1);
+}
+
+/* DIFFÉRENTS CHECK POUR DIFFÉRENTS FORMATS */
+int	check_for_three(game *prop, char **temp_buf)
+{
+	char	**temp_pos;
+
+	if (temp_buf[0][0] =='J' && (temp_buf[0][1] == '1' || temp_buf[0][1] == '2') && strlen(temp_buf[0]) == 2)
+	{
+		if (temp_buf[1][0] == 'P' && strlen(temp_buf[1]) == 1)
+		{
+			if (strchr(temp_buf[2], ':') != NULL)
+			{
+				temp_pos = ft_split(temp_buf[2], ':');
+				if (!get_position(prop, temp_pos, temp_buf[0][1], NULL))
+				{
+					free_split(temp_buf);
+					free_split(temp_pos);
+					return (0);
+				}
+				else
+				{
+					place_on_board(prop , temp_pos[0] , temp_pos[1], temp_buf[0][1]);
+				/*set_boat_place(); // TODO */
+					if (temp_buf[0][1] == '1')
+						print_board(prop, prop->board_j1);
+					else
+						print_board(prop, prop->board_j2);
+					prop->nb_boats++;
+					free_split(temp_pos);
+				}
+			}
+			else
+			{
+				print_error("Invalid format for placing boats\n", temp_buf);
+				return (0);
+			}
+		}
+		else
+		{
+			print_error("Invalid Player only two players in the game\n", temp_buf);
+			return (0);
+		}
+	}
+	else
+	{
+		print_error("Bad player number\n", temp_buf);
+		return (0);
+	}
+	return (1);
+}
+
+int	place_boats(game *prop, char *buffer)
+{
+	char	**temp_buf;
+
+	temp_buf = ft_split(buffer, ' ');
+	if (ft_strlen_2d(temp_buf) != 4 && ft_strlen_2d(temp_buf) != 3)
+	{
+		print_error("Invalid format for placing boats\n", temp_buf);
+		return (0);
+	}
+	if (ft_strlen_2d(temp_buf) == 4)
+	{
+		if (!check_for_four(prop, temp_buf))
+			return (0);
+	}
+	else if (ft_strlen_2d(temp_buf) == 3)
+	{
+		if (!check_for_three(prop, temp_buf))
+			return (0);
+	}
 	free_split(temp_buf);
+	return (1);
+}
+
+int	shoot_boat(game *prop, char *buffer)
+{
+	(void)prop;
+	(void)buffer;
 	return (1);
 }

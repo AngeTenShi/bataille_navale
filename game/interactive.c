@@ -59,7 +59,7 @@ void	interactive_mode(game *prop)
 		printf("Bataille navale > ");
 		fgets(buffer, 50, stdin);
 		if (!strncmp(buffer, "exit", 4))
-			interactive = 0;
+			break ;
 		if (prop->count == 0)
 		{
 			if (get_size_from_buffer(prop, buffer))
@@ -69,16 +69,12 @@ void	interactive_mode(game *prop)
 				count++;
 			}
 		}
-		if (prop->count > 0 && prop->count <= 8)
+		else
 		{
-			if (place_boats(prop, buffer))
-			{
-				write_into_savefile(prop,buffer);
-				count++;
-			}
+			if (!identify_command(prop, buffer))
+				break ;
+			count++;
 		}
-		if (prop->count > 8)
-			identify_command(prop, buffer);
 		fflush(stdin);
 		prop->count = count;
 	}

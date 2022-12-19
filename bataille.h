@@ -29,6 +29,7 @@ typedef struct game_properties
 	boats	*player_one_boats;
 	boats	*player_two_boats;
 	int		count;
+	int	nb_boats;
 	char	*game_id;
 } game;
 
@@ -53,11 +54,18 @@ int		is_boat(char *str);
 void	interactive_mode(game *prop);
 void	init_boats(game *prop);
 int		place_boats(game *prop, char *buffer);
-int		get_position(game *prop, char **temp_pos);
+int		get_position(game *prop, char **temp_pos, char player, char *boat);
 void	init_board(game *prop);
-int		place_on_board(game *prop, char *x, char *y, char player);
+void	place_on_board(game *prop, char *x, char *y, char player);
 void	print_board(game *prop, char **board);
-void	identify_command(game *prop, char *buffer);
+int		identify_command(game *prop, char *buffer);
+int		shoot_boat(game *prop, char *buffer);
+
+/* CHECKS */
+int	check_if_size_boat(game *prop, char *boat, int size);
+int	check_if_conflict(game *prop, int x, int y, char player);
+int	check_into_board(game *prop, int val, int x_or_y);
+int	check_game_begin(game *prop);
 
 /* SAVE */
 void	generate_game_id(game *prop);

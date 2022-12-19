@@ -17,7 +17,7 @@ void	init_board(game *prop)
 	prop->board_j2[i] = 0;
 }
 
-int	place_on_board(game *prop, char *x, char *y, char player)
+void	place_on_board(game *prop, char *x, char *y, char player)
 {
 	char	**temp_range;
 	int		i;
@@ -47,7 +47,7 @@ int	place_on_board(game *prop, char *x, char *y, char player)
 			i++;
 		}
 	}
-	if (strchr(y, '-') != NULL)
+	else if (strchr(y, '-') != NULL)
 	{
 		x_pos = atoi(x);
 		temp_range = ft_split(y, '-');
@@ -58,8 +58,13 @@ int	place_on_board(game *prop, char *x, char *y, char player)
 			i++;
 		}
 	}
+	else
+	{
+		board[atoi(y)][atoi(x)] = player;
+		return ;
+	}
 	free_split(temp_range);
-	return (1);
+	return ;
 }
 
 void	print_board(game *prop, char **board)
