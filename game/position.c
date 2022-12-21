@@ -64,7 +64,7 @@ int	get_position(game *prop, char **temp_pos, char player, char *boat)
 				}
 				i++;
 			}
-			if (!check_if_size_boat(prop, boat, i, player))
+			if (!check_if_size_boat(prop, boat, i - 1, player))
 			{
 				print_error("Error : Not good size for this boat\n", temp_range);
 				return (0);
@@ -104,7 +104,7 @@ int	get_position(game *prop, char **temp_pos, char player, char *boat)
 				}
 				i++;
 			}
-			if (!check_if_size_boat(prop, boat, i))
+			if (!check_if_size_boat(prop, boat, i - 1, player))
 			{
 				print_error("Error : Not good size for this boat\n", temp_range);
 				return (0);
@@ -130,7 +130,7 @@ int	get_position(game *prop, char **temp_pos, char player, char *boat)
 			printf("Error : A boat is already on this case\n");
 			return (0);
 		}
-		else if (!check_if_size_boat(prop, boat, 1))
+		else if (!check_if_size_boat(prop, boat, 1, player))
 		{
 			printf("Error : Not good size for this boat\n");
 			return (0);

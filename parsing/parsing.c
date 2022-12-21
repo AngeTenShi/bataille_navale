@@ -13,6 +13,7 @@ void	init_game_prop(game *prop)
 	prop->board_j2 = NULL;
 	prop->nb_boats_j1 = 0;
 	prop->nb_boats_j2 = 0;
+	prop->game_begin = 0;
 	generate_game_id(prop);
 }
 

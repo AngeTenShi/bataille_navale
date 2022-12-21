@@ -12,9 +12,9 @@ void	free_game(game *prop)
 	if (prop->game_id != NULL)
 		free_prof(prop->game_id);
 	if (prop->player_one_boats !=  NULL)
-		free_prof(prop->player_one_boats);
+		free_boats(prop->player_one_boats);
 	if (prop->player_one_boats != NULL)
-		free_prof(prop->player_two_boats);
+		free_boats(prop->player_two_boats);
 	free_prof(prop);
 }
 

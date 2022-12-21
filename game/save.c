@@ -1,5 +1,4 @@
 #include "../bataille.h"
-#include <errno.h>
 
 void	write_into_savefile(game *prop, char *buffer)
 {

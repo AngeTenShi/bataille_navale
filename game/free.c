@@ -19,17 +19,35 @@ void	free_split(char **splitted)
 
 void	free_boats_name(game *prop)
 {
-	int i;
+	boats	*tmp_j1;
+	boats	*tmp_j2;
 
-	i = 0;
 	if (prop->player_one_boats == NULL || prop->player_two_boats == NULL)
 		return ;
-	while (i < 4)
+	tmp_j1 = prop->player_one_boats;
+	tmp_j2 = prop->player_two_boats;
+	while (tmp_j1)
 	{
-		free_prof(prop->player_one_boats[i].name);
-		prop->player_one_boats[i].name = NULL;
-		free_prof(prop->player_two_boats[i].name);
-		prop->player_two_boats[i].name = NULL;
-		i++;
+		free_prof(tmp_j1->name);
+		tmp_j1->name = NULL;
+		tmp_j1 = tmp_j1->next;
+	}
+	while (tmp_j2)
+	{
+		free_prof(tmp_j2->name);
+		tmp_j2->name = NULL;
+		tmp_j2 = tmp_j2->next;
+	}
+}
+
+void	free_boats(boats *bateaux)
+{
+	boats	*tmp;
+
+	while (bateaux)
+	{
+		tmp = bateaux;
+		bateaux = bateaux->next;
+		free_prof(tmp);
 	}
 }

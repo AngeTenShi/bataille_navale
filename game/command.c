@@ -17,17 +17,25 @@ int	identify_command(game *prop, char *buffer)
 		}
 		else if (!strncmp("Jouer", buffer, strlen("Jouer")))
 		{
-			if (check_game_begin(prop)) /* Fonction qui permet de déterminer si la partie peut commencer*/
+			if (prop->game_begin == 0)
 			{
-				write_into_savefile(prop, buffer);
-				printf("Game is going to start : \n");
+				if (check_game_begin(prop)) /* Fonction qui permet de déterminer si la partie peut commencer*/
+				{
+					write_into_savefile(prop, buffer);
+					printf("******************************\n");
+					printf("*   Game is going to start   *\n");
+					printf("******************************\n");
+					prop->game_begin = 1;
+				}
+				else
+				{
+					printf("Game can't start because of the configuration\n");
+					free_split(temp_buf);
+					return (0);
+				}
 			}
 			else
-			{
-				printf("Game can't start because of the configuration\n");
-				free_split(temp_buf);
-				return (0);
-			}
+				printf("You can't launched a game that is already launched\n");
 		}
 		else
 			printf("Unrecognized command retype one\n");
@@ -36,14 +44,26 @@ int	identify_command(game *prop, char *buffer)
 	{
 		if (temp_buf[1][0] == 'P')
 		{
-			if (place_boats(prop, buffer))
-				write_into_savefile(prop, buffer);
+			if (prop->game_begin == 0)
+			{
+				if (place_boats(prop, buffer))
+					write_into_savefile(prop, buffer);
+			}
+			else
+				printf("You can't place boats while game is launched\n");
 		}
 		else if (temp_buf[1][0] == 'T')
 		{
-			if (shoot_boat(prop, buffer))
-				write_into_savefile(prop, buffer);
+			if (prop->game_begin == 1)
+			{
+				if (shoot_boat(prop, buffer))
+					write_into_savefile(prop, buffer);
+			}
+			else
+				printf("You can't shoot other boats while game isn't launched\n");
 		}
+		else
+			printf("Unrecognized command retype one\n");
 	}
 	free_split(temp_buf);
 	return (1);
