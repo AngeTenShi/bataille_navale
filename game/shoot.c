@@ -30,12 +30,18 @@ int	shoot(char **temp_pos, char ***board, char player)
 	}
 	x = atoi(temp_pos[0]);
 	y = atoi(temp_pos[1]);
-	if (*board[y][x] == 0)
-		*board[y][x] = '#';
-	else if (*board[y][x] == cible)
-		*board[y][x] = '*';
-	else if (*board[y][x] == myself)
-		printf("You can't shoot your self\n");
+	if ((*board)[y][x] == 0)
+	{
+		printf("*** Raté tu feras mieux la prochaine fois ***\n");
+		(*board)[y][x] = '#';
+	}
+	else if ((*board)[y][x] == cible)
+	{
+		printf("*** Touché !! ***\n");
+		(*board)[y][x] = '*';
+	}
+	else if ((*board)[y][x] == myself)
+		printf("*** You can't shoot your self ***\n");
 	return (1);
 }
 
@@ -59,9 +65,9 @@ int	check_shoot(game *prop, char **temp_buf)
 				else
 				{
 					if (temp_buf[0][1] == '1')
-						shoot(temp_pos, &prop->board_j1, temp_buf[0][1]);
-					else
 						shoot(temp_pos, &prop->board_j2, temp_buf[0][1]);
+					else
+						shoot(temp_pos, &prop->board_j1, temp_buf[0][1]);
 					free_split(temp_pos);
 				}
 			}
