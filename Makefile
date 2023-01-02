@@ -10,7 +10,7 @@ OBJS_DIR	=	objs
 SRCS		=	main.c prof/stdprof.c \
 				parsing/parsing.c parsing/utils.c \
 				game/interactive.c game/position.c game/error.c game/board.c game/free.c game/boats.c \
-				game/command.c game/save.c game/check.c game/shoot.c \
+				game/command.c game/save.c game/check.c game/shoot.c game/file_read.c \
 
 
 OBJS		=	$(SRCS:%.c=$(OBJS_DIR)/%.o)

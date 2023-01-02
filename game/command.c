@@ -5,6 +5,8 @@ int	identify_command(game *prop, char *buffer)
 	char	**temp_buf;
 
 	temp_buf = ft_split(buffer, ' ');
+	if (ft_strlen_2d(temp_buf) == 0)
+		return (1);
 	if (ft_strlen_2d(temp_buf) == 1)
 	{
 		if (!strncmp("Afficher", buffer, strlen("Afficher")))
@@ -26,6 +28,7 @@ int	identify_command(game *prop, char *buffer)
 					printf("*   Game is going to start   *\n");
 					printf("******************************\n");
 					prop->game_begin = 1;
+					prop->count = 2;
 				}
 				else
 				{
@@ -54,17 +57,27 @@ int	identify_command(game *prop, char *buffer)
 		}
 		else if (temp_buf[1][0] == 'T')
 		{
-			if (prop->game_begin == 1)
+			if ((prop->count % 2 == 0 && temp_buf[0][1] == '1') || (prop->count % 2 == 1 && temp_buf[0][1] == '2'))
 			{
-				if (shoot_boat(prop, buffer))
-					write_into_savefile(prop, buffer);
+				if (prop->game_begin == 1)
+				{
+					if (shoot_boat(prop, buffer))
+						write_into_savefile(prop, buffer);
+				}
+				else
+					printf("You can't shoot other boats while game isn't launched\n");
 			}
 			else
-				printf("You can't shoot other boats while game isn't launched\n");
+				printf("It's not your turn let your opponent play ...\n");
 		}
 		else
 			printf("Unrecognized command retype one\n");
 	}
 	free_split(temp_buf);
+	if (prop->game_begin == 1)
+	{
+		if (check_game_finished(prop))
+			return (0);
+	}
 	return (1);
 }

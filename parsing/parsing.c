@@ -20,13 +20,13 @@ void	init_game_prop(game *prop)
 int exec_args(int ac, char **av, game *prop)
 {
 	init_game_prop(prop);
-	/*if (ac == 1)
-		read_stdin_description(); */
-	if (ac == 2 && !strncmp(av[1], "-i", 2))
+	if (ac == 1)
+		read_file_description(prop, "/dev/stdin");
+	else if (ac == 2 && !strncmp(av[1], "-i", 2))
 		interactive_mode(prop);
-	/*else if (ac == 3 && !strncmp(av[1], "-f", 2))
-		read_filemap(av);
+	else if (ac == 3 && !strncmp(av[1], "-f", 2))
+		read_file_description(prop, av[2]);
 	else
-		return (0); */
+		return (0);
 	return (1);
 }

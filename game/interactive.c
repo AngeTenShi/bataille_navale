@@ -1,11 +1,11 @@
 #include "../bataille.h"
 
-int	get_size_from_buffer(game *prop, char *buffer)
+int get_size_from_buffer(game *prop, char *buffer)
 {
-	int		size_x;
-	int		size_y;
-	char	**temp_buf;
-	char	**temp_size;
+	int size_x;
+	int size_y;
+	char **temp_buf;
+	char **temp_size;
 
 	temp_buf = ft_split(buffer, ' ');
 	if (ft_strlen_2d(temp_buf) != 2)
@@ -36,15 +36,15 @@ int	get_size_from_buffer(game *prop, char *buffer)
 	return (1);
 }
 
-void	interactive_mode(game *prop)
+void interactive_mode(game *prop)
 {
-	int		interactive;
-	char	*buffer;
-	int		count;
+	int interactive;
+	char *buffer;
+	int count;
 
 	interactive = 1;
-	buffer = (char *)calloc_prof(50, sizeof(char));
-	count = 0;
+	buffer = (char *)calloc_prof(1024, sizeof(char));
+	count = prop->count;
 	printf("Welcome in the game your game id file is : %s\nYou can access it into save/%s\n", prop->game_id, prop->game_id);
 	while (interactive)
 	{
@@ -57,9 +57,9 @@ void	interactive_mode(game *prop)
 			printf("There is 4 types of boat per player : Gaia (size 2), Athena (size 3), Oedipe (taille 3), Herecles (size 4)\n");
 		}
 		printf("Bataille navale > ");
-		fgets(buffer, 50, stdin);
+		fgets(buffer, 1024, stdin);
 		if (!strncmp(buffer, "exit", 4))
-			break ;
+			break;
 		if (prop->count == 0)
 		{
 			if (get_size_from_buffer(prop, buffer))
@@ -72,10 +72,9 @@ void	interactive_mode(game *prop)
 		else
 		{
 			if (!identify_command(prop, buffer))
-				break ;
+				break;
 			count++;
 		}
-		fflush(stdin);
 		prop->count = count;
 	}
 	free_prof(buffer);

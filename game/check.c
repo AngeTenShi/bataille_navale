@@ -8,6 +8,13 @@ int	is_not_placed(game *prop, char *name, char player)
 		boats = prop->player_one_boats;
 	if (player == '2')
 		boats = prop->player_two_boats;
+	if (!boats->name)
+	{
+		if (boats->placed)
+			return (0);
+		else
+			return (1);
+	}
 	while (boats)
 	{
 		if (!strncmp(boats->name, name, strlen(name)) && strlen(name) == strlen(boats->name))
@@ -72,6 +79,8 @@ int	 check_if_size_boat(game *prop, char *boat, int size, char player)
 	}
 	while (element)
 	{
+		if (element->size == -1)
+			return (1);
 		if (!strncmp(boat, element->name, strlen(boat)) && strlen(boat) == strlen(element->name))
 		{
 			size_of_boat = element->size;
@@ -97,6 +106,8 @@ int	check_same_boat(boats *list)
 	count = 0;
 	while (tmp_1 && list->next)
 	{
+		if (!tmp_1->name || !tmp_2->name)
+			return (1);
 		while (tmp_2)
 		{
 			if (!strncmp(tmp_2->name, tmp_1->name, strlen(tmp_1->name)))
@@ -121,6 +132,8 @@ int	check_same_j1_j2(game *prop)
 	find = 0;
 	tmp_j1 = prop->player_one_boats;
 	tmp_j2 = prop->player_two_boats;
+	if (!tmp_j1->name || !tmp_j2->name)
+		return (1);
 	while (tmp_j1)
 	{
 		while (tmp_j2 && find == 0)
@@ -250,13 +263,13 @@ int	check_for_three(game *prop, char **temp_buf)
 					place_on_board(prop , temp_pos[0] , temp_pos[1], temp_buf[0][1]);
 					if (temp_buf[0][1] == '1')
 					{
-						set_boat_place(temp_buf[2], prop->player_one_boats);
+						set_boat_place(NULL, prop->player_one_boats);
 						print_board(prop, prop->board_j1);
 						prop->nb_boats_j1++;
 					}
 					else
 					{
-						set_boat_place(temp_buf[2], prop->player_two_boats);
+						set_boat_place(NULL, prop->player_two_boats);
 						print_board(prop, prop->board_j2);
 						prop->nb_boats_j2++;
 					}
@@ -281,4 +294,59 @@ int	check_for_three(game *prop, char **temp_buf)
 		return (0);
 	}
 	return (1);
+}
+
+int	check_game_finished(game *prop)
+{
+	char	**board;
+	int		count;
+	int		i;
+	int		j;
+
+	j = 0;
+	i = 0;
+	board = prop->board_j1;
+	count = 0;
+	while (i < prop->size_y)
+	{
+		while (j < prop->size_x)
+		{
+			if (board[i][j] == 'A')
+			{
+				count++;
+				break ;
+			}
+			j++;
+		}
+		j = 0;
+		i++;
+	}
+	i = 0;
+	board = prop->board_j2;
+	if (!count)
+	{
+		printf("*** PLAYER TWO WON THE GAME ***\n");
+		return (1);
+	}
+	count = 0;
+	while (i < prop->size_y)
+	{
+		while (j < prop->size_x)
+		{
+			if (board[i][j] == 'B')
+			{
+				count++;
+				break ;
+			}
+			j++;
+		}
+		i++;
+		j = 0;
+	}
+	if (!count)
+	{
+		printf("*** PLAYER ONE WON THE GAME ***\n");
+		return (1);
+	}
+	return (0);
 }

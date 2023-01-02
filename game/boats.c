@@ -48,6 +48,8 @@ void init_boats(game *prop)
 
 void	set_boat_place(char *name, boats *list_boat)
 {
+	if (!name)
+		return ;
 	while (list_boat)
 	{
 		if (!strncmp(name, list_boat->name, strlen(name)))

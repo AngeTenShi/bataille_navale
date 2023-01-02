@@ -121,6 +121,7 @@ char	*ft_strdup(char *c)
 
 int	is_boat(char *str)
 {
+	/* A REFAIRE AVEC LES TABLEAUX DE BATEAUX */
 	int i;
 	char	*name_tabs[4] = {"\"Gaia\"","\"Oedipe\"","\"Athena\"","\"Herecles\""};
 
