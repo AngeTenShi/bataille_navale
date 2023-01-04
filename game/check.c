@@ -132,8 +132,6 @@ int	check_same_j1_j2(game *prop)
 	find = 0;
 	tmp_j1 = prop->player_one_boats;
 	tmp_j2 = prop->player_two_boats;
-	if (!tmp_j1->name || !tmp_j2->name)
-		return (1);
 	while (tmp_j1)
 	{
 		while (tmp_j2 && find == 0)

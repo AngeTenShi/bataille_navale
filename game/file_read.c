@@ -51,9 +51,9 @@ void	read_file_description(game *prop, char *file)
 					if (temp_buf[0][1])
 					{
 						if (temp_buf[0][1] == '1')
-							add_boat(&prop->player_one_boats, NULL, -1);
+							add_boat(&prop->player_one_boats, ft_strdup("noname"), -1);
 						else
-							add_boat(&prop->player_two_boats, NULL, -1);
+							add_boat(&prop->player_two_boats, ft_strdup("noname"), -1);
 					}
 				}
 				free_split(temp_buf);

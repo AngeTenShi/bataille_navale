@@ -25,9 +25,9 @@ Certaines parties ont ete moins approfondies pour favoriser une gestion d'erreur
 
 Avant de lancer une partie de nombreux tests sont realises par exemple les bateaux de memes noms doivent etre de meme taille aucun probleme si les bateaux n'ont pas de noms ainsi que de nombreuses verifications logiques lors du placement et des tirs.
 
-Les 3 formats demandes ont ete geres.
+Les 4 formats sur les 3 demandes ont ete geres. (Format supplémentaire mix entre nom et sans nom)
 
-8 des 9 fonctionnalites demandees ont ete implementees 
+8 des 9 fonctionnalites demandees ont ete implementees
 
 Dont une IA intelligente un systeme de restauration et de sauvegarde avancee, une tres bonne gestion d'erreur et la gestion desbateaux avec leurs noms(les noms ne doivent pas contenir d'espace) le tout implemente avec une liste chainee de bateaux qui s'actualise a chaque input.
 
