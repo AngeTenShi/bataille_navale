@@ -26,7 +26,7 @@ int	identify_command(game *prop, char *buffer)
 					write_into_savefile(prop, buffer);
 					printf("******************************\n");
 					printf("*   Game is going to start   *\n");
-					printf("******************************\n");
+					printf("******************************\n\n");
 					prop->game_begin = 1;
 					prop->count = 2;
 				}
@@ -50,7 +50,10 @@ int	identify_command(game *prop, char *buffer)
 			if (prop->game_begin == 0)
 			{
 				if (place_boats(prop, buffer))
+				{
 					write_into_savefile(prop, buffer);
+					prop->count++;
+				}
 			}
 			else
 				printf("You can't place boats while game is launched\n");
@@ -62,7 +65,10 @@ int	identify_command(game *prop, char *buffer)
 				if (prop->game_begin == 1)
 				{
 					if (shoot_boat(prop, buffer))
+					{
 						write_into_savefile(prop, buffer);
+						prop->count++;
+					}
 				}
 				else
 					printf("You can't shoot other boats while game isn't launched\n");

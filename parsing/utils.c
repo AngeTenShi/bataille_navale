@@ -163,3 +163,21 @@ int	min(char *first, char *second)
 	else
 		return (s);
 }
+
+/* GESTION DES COMMENTAIRES DANS LE BUFFER */ 
+void	trim_commentary(char *buffer)
+{
+	char	*index;
+	char	*modif;
+
+	index = strchr(buffer, '#');
+	if (index != NULL)
+	{
+		while (index && *index)
+		{
+			modif = index;
+			(*index)++;
+			*modif = 0;
+		}
+	}
+}

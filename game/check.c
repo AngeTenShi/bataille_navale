@@ -325,6 +325,7 @@ int	check_game_finished(game *prop)
 	board = prop->board_j2;
 	if (!count)
 	{
+		print_board(prop, prop->board_j1);
 		printf("*** PLAYER TWO WON THE GAME ***\n");
 		return (1);
 	}
@@ -345,6 +346,7 @@ int	check_game_finished(game *prop)
 	}
 	if (!count)
 	{
+		print_board(prop, prop->board_j2);
 		printf("*** PLAYER ONE WON THE GAME ***\n");
 		return (1);
 	}

@@ -3,7 +3,11 @@ GONZALEZ ANGE
 
 stdprof supprimé pour plus de clareté les prototypes sont dans le fichier batlle.h
 
-differente regle du Makefile : all : compile projet , clean : supprime le dossier contenant les fichiers objets, fclean : clean et supprime le binaire compile , re : fclean + all 
+differente regle du Makefile :
+- all : compile projet
+- clean : supprime le dossier contenant les fichiers objets
+- fclean : clean et supprime le binaire compilé
+- re : fclean + all
 
 Regles :
 - Au plus 4 bateaux chacun pour les deux joueurs sinon erreur.
@@ -14,5 +18,17 @@ Regles :
 	- ./bataille_navale -f fichier permet de charger une configuration ou d'en restaurer une
 	- ./bataille_navale -i
 - Dans le mode interactif il n'y a pas de règles spéciales c'est roue libre tant que les prérequis pour lancer la partie sont respectés.
-- Il y'a deux boards différents c'est une approche différente mais plus réaliste chaque joueur à son board
+- Il y'a deux boards différents c'est une approche différente mais plus réaliste chaque jur a son propre board.
 - La commande Afficher affiche les deux boards dans tous les cas.
+
+Certaines parties ont ete moins approfondies pour favoriser une gestion d'erreur tres stricte pour gerer un maximum de format sans segfault ainsi que l'utilisation de structure de donnees plus avancees comme une liste chainees de bateaux pour gerer les bateaux.
+
+Les 3 formats demandes ont ete geres.
+
+8 des 9 fonctionnalites demandees ont ete implementees 
+
+Dont une IA intelligente un systeme de restauration et de sauvegarde avancee et une tres bonne gestion d'erreur
+
+Seul le deplacement des bateaux n'a pas ete realise par manque de temps.
+
+Des fichiers de test ont ete places dans le dossier test/ et dans save/ les formats donnes par le professeur inclus.

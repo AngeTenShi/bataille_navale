@@ -84,6 +84,7 @@ int		min(char *first, char *second);
 int		max(char *first, char *second);
 char	**ft_split(char const *s, char c);
 int		get_size_from_buffer(game *prop, char *buffer);
+void	trim_commentary(char *buffer);
 
 /* ERROR */
 void	print_error(char *message, char **to_free);

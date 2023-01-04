@@ -14,6 +14,9 @@ void	read_file_description(game *prop, char *file)
 	buffer = calloc_prof(1024, sizeof(char));
 	while (fgets(buffer, 1024, fptr) != NULL)
 	{
+		if (buffer[0] == '#')
+			continue ;
+		trim_commentary(buffer);
 		if (prop->count == 0)
 		{
 			if (get_size_from_buffer(prop, buffer))
@@ -56,37 +59,19 @@ void	read_file_description(game *prop, char *file)
 				free_split(temp_buf);
 			}
 			if (!identify_command(prop, buffer))
-				break ;
-			prop->count++;
+			{
+				free_prof(buffer);
+				fclose(fptr);
+				return ;
+			}
 		}
 	}
 	free_prof(buffer);
 	fclose(fptr);
 	if (!strcmp(file, "/dev/stdin"))
 	{
-		if (prop->game_begin == 1)
-		{
-			if (check_game_finished(prop))
-				printf("GAME IS ALREADY WON\n");
-			else
-				printf("GAME CAN BE START TRY TO RUN IT LIKE THAT : ./program -f save_file\n");
-		}
-		else
-		{
-			if (check_game_begin(prop))
-				printf("GAME CAN BE START TRY TO RUN IT LIKE ./program -f save_file\n");
-		}
+		printf("YOU CAN START THE GAME LIKE THAT : ./program -f save_file\n");
 	}
 	else
-	{
-		if (prop->game_begin == 1)
-		{
-			if (check_game_finished(prop))
-				printf("GAME IS ALREADY WON\n");
-			else
-				interactive_mode(prop);
-		}
-		else
-			interactive_mode(prop);
-	}
+		interactive_mode(prop);
 }
