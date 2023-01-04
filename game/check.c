@@ -72,7 +72,7 @@ int	 check_if_size_boat(game *prop, char *boat, int size, char player)
 		element = prop->player_two_boats;
 	if (boat == NULL)
 		return (1);
-	if (size > 4)
+	if (size > 6)
 	{
 		printf("Boat too long\n");
 		return (0);
@@ -178,7 +178,7 @@ int	check_for_four(game *prop, char **temp_buf)
 	{
 		if (temp_buf[1][0] == 'P' && strlen(temp_buf[1]) == 1)
 		{
-			if (is_boat(temp_buf[2]))
+			if (is_boat(prop, temp_buf[2], temp_buf[0][1]))
 			{
 				if (strchr(temp_buf[3], ':') != NULL)
 				{

@@ -23,11 +23,13 @@ Regles :
 
 Certaines parties ont ete moins approfondies pour favoriser une gestion d'erreur tres stricte pour gerer un maximum de format sans segfault ainsi que l'utilisation de structure de donnees plus avancees comme une liste chainees de bateaux pour gerer les bateaux.
 
+Avant de lancer une partie de nombreux tests sont realises par exemple les bateaux de memes noms doivent etre de meme taille aucun probleme si les bateaux n'ont pas de noms ainsi que de nombreuses verifications logiques lors du placement et des tirs.
+
 Les 3 formats demandes ont ete geres.
 
 8 des 9 fonctionnalites demandees ont ete implementees 
 
-Dont une IA intelligente un systeme de restauration et de sauvegarde avancee et une tres bonne gestion d'erreur
+Dont une IA intelligente un systeme de restauration et de sauvegarde avancee, une tres bonne gestion d'erreur et la gestion desbateaux avec leurs noms(les noms ne doivent pas contenir d'espace) le tout implemente avec une liste chainee de bateaux qui s'actualise a chaque input.
 
 Seul le deplacement des bateaux n'a pas ete realise par manque de temps.
 

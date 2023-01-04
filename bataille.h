@@ -49,7 +49,7 @@ void free_prof (void *ptr);
 int		exec_args(int ac, char **av, game *prop);
 int		ft_strlen_2d(char **tab);
 char	*ft_strdup(char *c);
-int		is_boat(char *str);
+int		is_boat(game *prop, char *str, char player);
 void	set_boat_place(char *name, boats *list_boat);
 void	read_file_description(game *prop, char *file);
 

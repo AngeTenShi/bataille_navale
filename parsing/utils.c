@@ -119,21 +119,22 @@ char	*ft_strdup(char *c)
 	return (dup);
 }
 
-int	is_boat(char *str)
+int	is_boat(game *prop, char *str, char player)
 {
-	/* A REFAIRE AVEC LES TABLEAUX DE BATEAUX */
-	int i;
-	char	*name_tabs[4] = {"\"Gaia\"","\"Oedipe\"","\"Athena\"","\"Herecles\""};
+	boats	*temp;
 
-	i = 0;
-	while (i < 4)
+	if (player == '1')
+		temp = prop->player_one_boats;
+	else
+		temp = prop->player_two_boats;
+	while (temp)
 	{
-		if (strlen(name_tabs[i]) == strlen(str))
+		if (strlen(temp->name) == strlen(str))
 		{
-			if (!strncmp(str , name_tabs[i], strlen(str)))
+			if (!strncmp(str , temp->name, strlen(str)))
 				return (1);
 		}
-		i++;
+		temp = temp->next;
 	}
 	return (0);
 }
@@ -164,7 +165,7 @@ int	min(char *first, char *second)
 		return (s);
 }
 
-/* GESTION DES COMMENTAIRES DANS LE BUFFER */ 
+/* GESTION DES COMMENTAIRES DANS LE BUFFER */
 void	trim_commentary(char *buffer)
 {
 	char	*index;
