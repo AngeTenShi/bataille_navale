@@ -18,6 +18,11 @@ typedef struct boats
 	struct boats	*next;
 }	boats;
 
+typedef struct ia
+{
+	char	last_touch_x;
+	char	last_touch_y;
+}	IA;
 
 /* STRUCTURE GLOBALE QUI CONTINET LES PROPRIÉTES DE LA PARTIE */
 typedef struct game_properties
@@ -66,6 +71,11 @@ void	print_board(game *prop, char **board);
 int		identify_command(game *prop, char *buffer);
 int		shoot_boat(game *prop, char *buffer);
 
+/* IA */
+
+IA		*init_IA(void);
+int		ia_play(game *prop, IA *player);
+
 /* CHECKS */
 int	check_if_size_boat(game *prop, char *boat, int size, char player);
 int	check_if_conflict(game *prop, int x, int y, char player);
@@ -85,6 +95,7 @@ int		max(char *first, char *second);
 char	**ft_split(char const *s, char c);
 int		get_size_from_buffer(game *prop, char *buffer);
 void	trim_commentary(char *buffer);
+void clear_stdin();
 
 /* ERROR */
 void	print_error(char *message, char **to_free);

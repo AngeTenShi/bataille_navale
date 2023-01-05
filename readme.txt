@@ -29,7 +29,7 @@ Les 4 formats sur les 3 demandes ont ete geres. (Format supplémentaire mix entr
 
 8 des 9 fonctionnalites demandees ont ete implementees
 
-Dont une IA intelligente un systeme de restauration et de sauvegarde avancee, une tres bonne gestion d'erreur et la gestion desbateaux avec leurs noms(les noms ne doivent pas contenir d'espace) le tout implemente avec une liste chainee de bateaux qui s'actualise a chaque input.
+Dont une IA intelligente (mode interactif only) qui réfléchit à chaque coup et capable de gagner un adversaire solide. Un systeme de restauration et de sauvegarde avancee, une tres bonne gestion d'erreur et la gestion desbateaux avec leurs noms(les noms ne doivent pas contenir d'espace) le tout implemente avec une liste chainee de bateaux qui s'actualise a chaque input.
 
 Seul le deplacement des bateaux n'a pas ete realise par manque de temps.
 

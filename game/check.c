@@ -106,7 +106,7 @@ int	check_same_boat(boats *list)
 	count = 0;
 	while (tmp_1 && list->next)
 	{
-		if (!tmp_1->name || !tmp_2->name)
+		if (!strcmp(tmp_1->name, "noname") || !strcmp(tmp_2->name, "noname"))
 			return (1);
 		while (tmp_2)
 		{
@@ -158,7 +158,7 @@ int	check_game_begin(game *prop)
 	int	nb_boats;
 
 	nb_boats = prop->nb_boats_j1 + prop->nb_boats_j2;
-	if (nb_boats < 2 || nb_boats > 6 )
+	if (nb_boats < 2 || nb_boats > 14)
 		return (0);
 	if (prop->nb_boats_j1 != prop->nb_boats_j2)
 		return (0);

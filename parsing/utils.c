@@ -182,3 +182,9 @@ void	trim_commentary(char *buffer)
 		}
 	}
 }
+
+void clear_stdin()
+{
+	int c;
+	while ((c = getchar()) != '\n' && c != EOF);
+}
