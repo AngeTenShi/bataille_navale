@@ -15,6 +15,11 @@ int	ia_play(game *prop, IA *player)
 	int	x;
 	int	y;
 	char *input;
+	int	temp_x;
+	int	temp_y;
+
+	temp_x = player->last_touch_x;
+	temp_y = player->last_touch_y;
 
 	srand(time(NULL));
 	if (player->last_touch_x != 0)
@@ -44,10 +49,12 @@ int	ia_play(game *prop, IA *player)
 		y = rand() % prop->size_y;
 	input = calloc_prof(9, 1);
 	sprintf(input, "J2 T %d:%d", x, y);
-	if (prop->board_j1[y][x] != 0)
+	if (prop->board_j1[y][x] == '#')
 	{
-		player->last_touch_x = x;
-		player->last_touch_y = y;
+		if (x == temp_x)
+			player->last_touch_x = 0;
+		if (y == temp_y)
+			player->last_touch_y = 0;
 	}
 	if (!identify_command(prop, input))
 	{
