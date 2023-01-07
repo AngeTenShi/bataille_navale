@@ -29,8 +29,14 @@ Les 4 formats sur les 3 demandes ont ete geres. (Format supplémentaire mix entr
 
 8 des 9 fonctionnalites demandees ont ete implementees
 
-Dont une IA intelligente (mode interactif only) qui réfléchit à chaque coup et capable de gagner un adversaire solide. Un systeme de restauration et de sauvegarde avancee, une tres bonne gestion d'erreur et la gestion desbateaux avec leurs noms(les noms ne doivent pas contenir d'espace) le tout implemente avec une liste chainee de bateaux qui s'actualise a chaque input.
+Dont une IA intelligente (mode interactif only) qui place ses bateaux aléatoirement en vertical ou horizontal pas toujours la même chose.
+Elle réfléchit également à chacun de ses coup et est capable de gagner un adversaire solide.
 
-Seul le deplacement des bateaux n'a pas ete realise par manque de temps.
+Un systeme de restauration et de sauvegarde avancee, une tres bonne gestion d'erreur et la gestion desbateaux avec leurs noms(les noms ne doivent pas contenir d'espace) le tout implemente avec une liste chainee de bateaux qui s'actualise a chaque input.
 
-Des fichiers de test ont ete places dans le dossier test/ et dans save/ les formats donnes par le professeur inclus.
+Seul le deplacement des bateaux n'a pas ete realisé par manque de temps.
+
+Des fichiers de test ont été places dans le dossier test/ et dans save/ (plus de 222 parties / debuts de parties) les formats donnés par le professeur inclus dans test/ .
+
+
+TEMPS DE CONCEPTION : 1 Dec - 7 Jan

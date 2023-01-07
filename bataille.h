@@ -75,6 +75,7 @@ int		shoot_boat(game *prop, char *buffer);
 
 IA		*init_IA(void);
 int		ia_play(game *prop, IA *player);
+void	ia_placeboat(game *prop);
 
 /* CHECKS */
 int	check_if_size_boat(game *prop, char *boat, int size, char player);

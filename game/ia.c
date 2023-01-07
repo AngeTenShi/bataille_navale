@@ -64,3 +64,34 @@ int	ia_play(game *prop, IA *player)
 	free_prof(input);
 	return (1);
 }
+
+void	ia_placeboat(game *prop)
+{
+	int	i;
+	int	x;
+	int	y;
+	char *input;
+	boats	*tmp;
+
+	srand(time(NULL));
+	tmp = prop->player_two_boats;
+	i = 0;
+	while (i < 4)
+	{
+		input = calloc_prof(50, 1);
+		x = rand() % (prop->size_x - tmp->size);
+		y = rand() % (prop->size_y - tmp->size); /* X ET Y ALEATOIRE POUR PLACER LES BATEAUX DE L'IA selon la taille du bateau */
+		if (rand() % 2 == 0) /* UNE CHANCE SUR DEUX QUE LE BATEAUX SOIT EN VERTICALE OU HORIZONTALE */
+			sprintf(input, "J2 P %s %d-%d:%d", tmp->name, x, x + tmp->size - 1, y);
+		else
+			sprintf(input, "J2 P %s %d:%d-%d", tmp->name, x, y, y + tmp->size - 1);
+		if (place_boats(prop, input))
+		{
+			tmp = tmp->next;
+			i++;
+			prop->count++;
+		}
+		free_prof(input);
+		printf("IA has finished placing it's boats\n");
+	}
+}

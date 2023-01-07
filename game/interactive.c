@@ -40,7 +40,6 @@ void interactive_mode(game *prop)
 {
 	int interactive;
 	char *buffer;
-	int count;
 	char	ask;
 	int		ia;
 	IA *player;
@@ -48,9 +47,8 @@ void interactive_mode(game *prop)
 	interactive = 1;
 	ia = 0;
 	buffer = (char *)calloc_prof(1024, sizeof(char));
-	count = prop->count;
 	printf("Welcome in the game your game id file is : %s\nYou can access it into save/%s\n", prop->game_id, prop->game_id);
-	if (count == 0)
+	if (prop->count == 0)
 	{
 		printf("Do you want to play against IA ? : (y or n)\n");
 		scanf("%c", &ask);
@@ -69,10 +67,12 @@ void interactive_mode(game *prop)
 		if (prop->count == 1)
 		{
 			init_boats(prop);
+			if (ia)
+				ia_placeboat(prop);
 			printf("Place your boats on the board (Format : J1/2 P \"Name\" x:y)\n");
 			printf("There is 4 types of boat per player : Gaia (size 2), Athena (size 3), Oedipe (taille 3), Herecles (size 4)\n");
 		}
-		if (ia && prop->count % 2 == 1)
+		if (ia && prop->count % 2 == 1 && prop->count > 1 && prop->game_begin)
 		{
 			printf("IA IS GOING TO PLAY :\n");
 			sleep(5);
@@ -85,7 +85,7 @@ void interactive_mode(game *prop)
 		trim_commentary(buffer);
 		if (!strncmp(buffer, "exit", 4))
 			break;
-		if (count == 0)
+		if (prop->count == 0)
 		{
 			if (get_size_from_buffer(prop, buffer))
 			{
@@ -100,6 +100,7 @@ void interactive_mode(game *prop)
 				break;
 		}
 	}
-	free_prof(player);
+	if (ia)
+		free_prof(player);
 	free_prof(buffer);
 }
