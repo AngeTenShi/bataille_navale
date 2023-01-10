@@ -92,6 +92,6 @@ void	ia_placeboat(game *prop)
 			prop->count++;
 		}
 		free_prof(input);
-		printf("IA has finished placing it's boats\n");
 	}
+	printf("IA has finished placing it's boats\n");
 }

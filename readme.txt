@@ -11,7 +11,7 @@ differente regle du Makefile :
 
 Regles :
 - Au plus 4 bateaux chacun pour les deux joueurs sinon erreur.
-- Chaque joueur a un board de minimum 5x5 question d'esthetisme tout autre taille en dessous sera refuse.
+- Chaque joueur a un board de minimum 5x5 question d'esthétisme tout autre taille en dessous sera refusée ainsi qu'une taille supérieure à 10.
 - La seule commande qui fait sortir du programme est "Jouer" si la configuration n'est pat celle demande alors on sort du mode interactif
 - 3 modes d'execution :
 	- cat fichier | ./bataille_navalle permet de visualiser où en est une partie si elle est valide. Ne permets pas de restaurer la partie en mode intéractif
@@ -37,6 +37,3 @@ Un systeme de restauration et de sauvegarde avancee, une tres bonne gestion d'er
 Seul le deplacement des bateaux n'a pas ete realisé par manque de temps.
 
 Des fichiers de test ont été places dans le dossier test/ et dans save/ (plus de 222 parties / debuts de parties) les formats donnés par le professeur inclus dans test/ .
-
-
-TEMPS DE CONCEPTION : 1 Dec - 7 Jan
