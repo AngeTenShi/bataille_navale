@@ -19,9 +19,9 @@ int get_size_from_buffer(game *prop, char *buffer)
 		temp_size = ft_split(temp_buf[1], 'x');
 		size_x = atoi(temp_size[0]);
 		size_y = atoi(temp_size[1]);
-		if (size_x < 5 || size_y < 5)
+		if (size_x < 5 || size_y < 5 || size_x > 10 || size_y > 10)
 		{
-			printf("Project size too little re enter one\n");
+			printf("Project size too little or too long re enter one\n");
 			free_split(temp_size);
 			free_split(temp_buf);
 			return (0);

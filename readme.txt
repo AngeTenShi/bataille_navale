@@ -18,7 +18,7 @@ Regles :
 	- ./bataille_navale -f fichier permet de charger une configuration ou d'en restaurer une
 	- ./bataille_navale -i
 - Dans le mode interactif il n'y a pas de règles spéciales c'est roue libre tant que les prérequis pour lancer la partie sont respectés.
-- Il y'a deux boards différents c'est une approche différente mais plus réaliste chaque jur a son propre board.
+- Il y'a deux boards différents c'est une approche différente mais plus réaliste chaque joueurs a son propre board.
 - La commande Afficher affiche les deux boards dans tous les cas.
 
 Certaines parties ont ete moins approfondies pour favoriser une gestion d'erreur tres stricte pour gerer un maximum de format sans segfault ainsi que l'utilisation de structure de donnees plus avancees comme une liste chainees de bateaux pour gerer les bateaux.
